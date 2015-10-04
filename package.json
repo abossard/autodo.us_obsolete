@@ -9,13 +9,27 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.4.7",
     "express": "^4.13.3",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "livereload-js": "^2.2.2"
   },
   "devDependencies": {
+    "angular": "^1.4.7",
+    "angular-route": "^1.4.7",
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
+    "connect-livereload": "^0.5.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.0.4",
     "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.6.0"
+    "gulp-sourcemaps": "^1.6.0",
+    "jquery": "^2.1.4",
+    "ramda": "^0.17.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.4.0"
   }
 }
