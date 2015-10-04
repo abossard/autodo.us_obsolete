@@ -5,8 +5,8 @@ app.use(require('connect-livereload')({
     port: 35729
 }));
 app.use('/static', express.static('public'))
-app.get('/views/books', function (req, res) {
-    res.render('books', { title: 'Hey', message: 'Hello there!'});
+app.get('/views/:viewName', function (req, res) {
+    res.render(req.params.viewName, { title: 'Hey', message: 'Hello there!'});
 });
 app.get('/', function (req, res) {
     res.render('index', { title: 'Hey', message: 'Hello there!'});
