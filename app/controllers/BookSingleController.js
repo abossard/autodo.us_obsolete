@@ -1,4 +1,6 @@
-export default function($scope, $routeParams) {
-    $scope.asdasd = ['a', 'B', 'c'];
-    $scope.bookId = $routeParams
+export default function BookSingleCtrl($scope,
+                                       $routeParams,
+                                       counterService) {
+    $scope.bookId = $routeParams.bookId;
+    $scope.c = counterService.getCount();
 }

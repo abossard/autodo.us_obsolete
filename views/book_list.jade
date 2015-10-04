@@ -1,1 +1,4 @@
-h3 Book List
+h3 Book List {{c}} {{shibbyName}}
+ul
+    li(ng-repeat='book in books')
+        a(href='#/book/{{book.id}}') {{book.name}}

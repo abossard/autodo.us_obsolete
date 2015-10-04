@@ -6,10 +6,19 @@ app.use(require('connect-livereload')({
 }));
 app.use('/static', express.static('public'))
 app.get('/views/:viewName', function (req, res) {
-    res.render(req.params.viewName, { title: 'Hey', message: 'Hello there!'});
+    res.render(req.params.viewName, {title: 'Hey', message: 'Hello there!'});
 });
+app.get('/api/:model', function (req, res) {
+    switch (req.params.model) {
+        case 'book':
+        case 'books':
+            res.send([{name: 'REAL', id: 1}, {name: 'UNREAL', id: 2}])
+        default:
+            res.send({})
+    }
+})
 app.get('/', function (req, res) {
-    res.render('index', { title: 'Hey', message: 'Hello there!'});
+    res.render('index', {title: 'Hey', message: 'Hello there!'});
 });
 
 var server = app.listen(3000, function () {
