@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.4.7",
+    "elasticsearch": "^8.2.0",
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "livereload-js": "^2.2.2"
