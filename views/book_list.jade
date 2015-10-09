@@ -1,4 +1,6 @@
 h3 Book List {{c}} {{shibbyName}}
+label Search:
+    input(ng-model="searchText")
 ul
-    li(ng-repeat='book in books')
+    li(ng-repeat='book in books | filter: searchText')
         a(href='#/book/{{book.id}}') {{book.name}}

@@ -1,12 +1,14 @@
 html
     head
         script(src='/static/index.js')
+        link(rel="stylesheet",type="text/css",href="/static/css/styles/main.css")
         title!= title
     body(ng-app='autodo')
         h1!= message
+        shibby-name nice
         ng-view
-        div
-            h2 {{name}}
+        div(ng-init='myClass="geilo"')
+            h2(ng-class='myClass') {{name}}
             input(type='text', ng-model='name')
             div(ng-init='shibby1=["a", "B"]')
                 ul
