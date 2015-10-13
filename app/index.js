@@ -16,6 +16,8 @@ var BookSingleController = require('./controllers/BookSingleController');
 var GarbageFactory = require('./factories/ProduceGarbage');
 var CounterService = require('./services/Counter');
 var ShibbyName = require('./directives/ShibbyName');
+var BookDirective = require('./directives/book');
+
 app.constant('VERSION', require('../package.json').version)
 app.value('shibbyName', 'SHIBBY');
 app.controller('SimpleController', SimpleController)
@@ -24,6 +26,8 @@ app.controller('BookSingleController', BookSingleController)
 app.factory('garbageFactory', GarbageFactory);
 app.service('counterService', CounterService);
 app.directive('shibbyName', ShibbyName);
+app.directive('book', BookDirective);
+
 app.config(function($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'views/book_list',

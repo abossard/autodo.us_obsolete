@@ -3,4 +3,4 @@ label Search:
     input(ng-model="searchText")
 ul
     li(ng-repeat='book in books | filter: searchText')
-        a(href='#/book/{{book.id}}') {{book.name}}
+        a(href='#/book/{{book.id}}') {{book.title}}

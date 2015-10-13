@@ -64,6 +64,9 @@ gulp.task('nodemon', function () {
         ignore: ['app', 'public', 'gulpfile.js', '.idea'],
         verbose: false,
         ext: 'js',
+        execMap: {
+            js: "node --harmony --use_strict"
+        },
         env: {'NODE_ENV': 'development'}
     })
 })

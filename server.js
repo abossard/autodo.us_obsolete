@@ -1,8 +1,66 @@
-var elasticsearch = require('elasticsearch');
-var client = new elasticsearch.Client({
+const debug = require('debug');
+const info = debug('server:info');
+const error = debug('server:error');
+const R = require('ramda');
+const elasticsearch = require('elasticsearch');
+const client = new elasticsearch.Client({
     host: 'localhost:9200',
-    log: 'trace'
+    log: 'error',
+    apiVersion: '2.0'
 });
+
+client.ping({
+    requestTimeout: 30000,
+    hello: "elasticsearch"
+}).then(()=> {
+    info('nice')
+}).catch(error)
+
+const callElasticsearch = R.curry((client, method, index, data) => {
+    return client[method](Object.assign({
+        index
+    }, data));
+});
+
+const typeBodyToData = function (type, body) {
+    let id = body.id;
+    return {type, body, id}
+};
+const typeToData = function (type) {
+    return {type}
+}
+
+const resultToJson = R.map((item)=>(Object.assign({
+    id: item._id,
+    type: item._type
+}, item._source)));
+
+const getResults = function (result) {
+    return result.hits.hits
+}
+const addModel = R.compose(
+    callElasticsearch(client, 'index', 'autodo'),
+    typeBodyToData
+);
+
+const searchModel = R.compose(callElasticsearch(client, 'search', 'autodo'), typeToData);
+
+const addBook = addModel('book');
+R.range(0, 1).forEach(()=> {
+    addBook({
+        title: 'Title'
+    })
+});
+const trace = R.curry((name, value)=> {
+    console.log(name, value)
+    return value
+})
+const searchBook = searchModel('book');
+
+console.log('RRRRRRRRRRRRRRRRRR:', searchBook.then(
+    R.compose(trace('AFTER RESULT TO JSON'), resultToJson, trace('AFTER GET RESULTS'), getResults, trace('AFTER SEARCH BOOK'))
+));
+
 var express = require('express')
 var app = express()
 app.set('view engine', 'jade');
@@ -30,7 +88,10 @@ app.get('/api/:model', function (req, res) {
     switch (req.params.model) {
         case 'book':
         case 'books':
-            return res.json([{name: 'REAL', id: 1}, {name: 'UNREAL', id: 2}])
+            return searchBook.then((r) => {
+                    res.json(R.compose(resultToJson, getResults)(r))
+                }
+            )
         default:
             return res.json({})
     }

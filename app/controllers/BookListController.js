@@ -1,3 +1,4 @@
+var R = require('ramda');
 export default function BookListController($scope,
                                            garbageFactory,
                                            counterService,

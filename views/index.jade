@@ -6,6 +6,7 @@ html
     body(ng-app='autodo')
         h1!= message
         shibby-name nice
+        div(shibby-name)
         ng-view
         div(ng-init='myClass="geilo"')
             h2(ng-class='myClass') {{name}}

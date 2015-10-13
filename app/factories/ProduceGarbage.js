@@ -1,3 +1,4 @@
+var R = require('ramda');
 export default function ProduceGarbage($http, $log) {
     console.log('CREATE FACTORY INSTANCE');
     return {
